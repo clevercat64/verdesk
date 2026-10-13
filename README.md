@@ -67,7 +67,7 @@ For **LAN** (same network) and **WAN** (over the internet via SSH tunnel or Tail
 - Windows 10 / 11 (x64)
 - Works with **Claude Code**, **GPT** (any MCP-compatible client) and **local models**
 - No usage telemetry · No account required · Single executable
-- What does leave your PC: the sign-up report when you finish the first-run welcome (your `email`, a random `machine_id` made on this PC, the `app_version` and your tier, Free or Pro; never your license key), sent to a script run by the project owner; license checks with `pay.verdesk.app` if you have a paid license; checks for new releases on GitHub; and a report only if you or your agent choose to send one. The exact fields are listed in [SECURITY.md](./.github/SECURITY.md).
+- What does leave your PC: the sign-up report when you finish the first-run welcome (your `email`, a random `machine_id` made on this PC, the `app_version` and your tier, Free or Pro; never your license key), sent to the project's server at `pay.verdesk.app`, which emails it to the project; license checks with `pay.verdesk.app` if you have a paid license; checks for new releases on GitHub; and a report only if you or your agent choose to send one. The exact fields are listed in [SECURITY.md](./.github/SECURITY.md).
 
 ---
 
