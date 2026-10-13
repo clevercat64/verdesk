@@ -2,11 +2,11 @@
 
 ## Reporting a Vulnerability
 
-If you find a security issue in Verdesk, **please do not open a public issue**. Email **camilo.brossard@gmail.com** with:
+If you find a security issue in Verdesk, **please do not open a public issue**. Email **support@clever.cat** with:
 
 - A short description of the vulnerability.
 - Steps to reproduce (a proof-of-concept is welcome but not required).
-- The Verdesk version (*Settings → About*) and your Windows version.
+- The Verdesk version (*Settings → Home*) and your Windows version.
 
 You will receive a reply within 72 hours acknowledging receipt. Confirmed issues are patched in the next point release; the reporter is credited in the release notes unless they prefer to stay anonymous.
 
@@ -16,8 +16,16 @@ The latest published Release is the only supported version. Older Releases stop 
 
 ## Scope
 
-Verdesk runs entirely on the user's machine — there is no Verdesk-controlled server. Reports about:
+Verdesk runs on the user's machine and sends no usage telemetry. What it does send:
+
+- **License and store service, `pay.verdesk.app`.** With a paid license: a license check (`/lic/check`, fields `token`, `machine`, `nonce`, `v`) and a renewal (`/lic/refresh`, field `token`). `machine` is a 64-character HMAC of the Windows machine GUID; the GUID itself is not kept.
+- **Sign-up report.** Once, at the end of the first-run welcome window, to a Google Apps Script run by the project owner, which emails it to them. Fields: `timestamp`, `type` (`onboarding`), `title` (`New Free user` or `New Pro user`), `body` (text with the tier, `email`, `machine`, `version`, and an `error` code only if a license key was rejected), `email`, `app_version`, `machine_id` (a random UUID generated on this PC and kept there) and `token` (12 hex characters). The license key itself is never sent.
+- **Reports you or your agent choose to send** (the `send_report` tool): through a form forwarder (FormSubmit) to the project's email, with `kind`, `topic`, `message`, `source`, `version` and `host` (the computer name).
+- **New releases.** Verdesk asks GitHub for the latest release.
+
+Reports about:
 
 - Local privilege escalation, sandbox escape, RCE via Verdesk itself, or any path that lets a third party connect or act without the user's approval popup → **in scope**.
-- LemonSqueezy License API issues → out of scope here; report to LemonSqueezy directly.
+- The license service (`pay.verdesk.app`): forging or obtaining licenses, getting around the 2-computer limit, or revoking someone else's license → **in scope**; use the same email.
+- The payment provider's own systems → out of scope here; report to the provider directly.
 - Issues that require the user to install a separate malicious MCP client themselves → out of scope (Verdesk is the server, not the client).
