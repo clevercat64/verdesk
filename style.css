@@ -98,7 +98,7 @@
   /* redondeo pequeño y parejo (boss) */
   .card { border-radius: 10px; }
   .btn, .buy-btn { border-radius: 6px; }
-  .use, .pro, .buy-btn .soon, ol.steps li::before, .lang-select { border-radius: 4px; }
+  .use, .pro, ol.steps li::before, .lang-select { border-radius: 4px; }
   ol.steps { margin: 0; padding: 0; list-style: none; counter-reset: st; display: grid; gap: 14px; max-width: 72ch; }
   ol.steps li { counter-increment: st; position: relative; padding-left: 40px; color: var(--ink-2); font-size: 16px; }
   ol.steps li::before { content: counter(st); position: absolute; left: 0; top: 0; width: 26px; height: 26px; border: 1px solid var(--line-2); color: #28E08C; font-family: var(--mono); font-size: 13px; display: grid; place-items: center; }
@@ -132,8 +132,11 @@
   .six .ic, .ex .ic, .plan-ic, .trial .ic { animation: haz 9s ease-in-out infinite; animation-delay: calc(var(--i, 0) * -0.5s); }
   .plans > div:last-child .plan-ic { --i: 20; }
   @media (prefers-reduced-motion: reduce) { .six .ic, .ex .ic, .plan-ic, .trial .ic { animation: none; } }
-  .buy-btn { margin-top: 16px; background: transparent; color: var(--ink-3); border-color: var(--line-2); font: inherit; font-size: 15px; cursor: not-allowed; }
-  .buy-btn .soon { font-family: var(--mono); font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--amber); border: 1px solid var(--line-2); padding: 0 6px; }
+  .card .price { margin: auto 0 0; padding-top: 6px; color: var(--ink-3); font-size: 14px; }
+  .card-foot.trial + .price { margin-top: 0; }
+  .price .amt { font-family: var(--display); font-weight: 700; font-size: 26px; letter-spacing: -.01em; color: var(--ink); margin-right: 2px; }
+  .buy-btn { margin-top: 4px; background: transparent; color: var(--green); border-color: var(--green); font: inherit; font-size: 15px; cursor: pointer; }
+  .buy-btn:hover, .buy-btn:focus-visible { background: var(--green); color: #04130B; }
   .lang-top { position: absolute; top: 4px; right: max(12px, calc(50% - 548px)); z-index: 2; background: transparent; border: 0; color: var(--ink-3); font-size: 12px; padding: 2px 4px; cursor: pointer; }
   .lang-top:hover, .lang-top:focus-visible { color: var(--ink-2); }
   .lang-top option { background: #0E141A; color: #E8EEF2; }
