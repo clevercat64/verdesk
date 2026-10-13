@@ -2,7 +2,7 @@
 
 ## Reporting a Vulnerability
 
-If you find a security issue in Verdesk, **please do not open a public issue**. Email **support@clever.cat** with:
+If you find a security issue in Verdesk, **please do not open a public issue**. Email **support@verdesk.app** with:
 
 - A short description of the vulnerability.
 - Steps to reproduce (a proof-of-concept is welcome but not required).

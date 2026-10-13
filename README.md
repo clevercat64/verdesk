@@ -83,4 +83,4 @@ Security vulnerabilities: see [SECURITY.md](./.github/SECURITY.md).
 
 Verdesk is **proprietary, source-available only for the prebuilt binaries** distributed here. The full EULA is in [LICENSE](./LICENSE).
 
-© clever.cat — Camilo Brossard · `support@clever.cat`
+© clever.cat — Camilo Brossard · `support@verdesk.app`
