@@ -120,6 +120,14 @@ function Install-Verdesk {
         }
         return ''
     }
+    # SHA256 del archivo con .NET, en mayusculas como lo daba Get-FileHash. Get-FileHash NO se usa: en Windows PowerShell 5.1 es una funcion de Microsoft.PowerShell.Utility que se
+    # resuelve por PSModulePath, y un 5.1 abierto desde PowerShell 7 hereda el de PS7 y no la encuentra ("Get-FileHash no se reconoce" despues de bajar los 227 MB).
+    function Get-Sha256([string]$path) {
+        $sha = [Security.Cryptography.SHA256]::Create()
+        $fs = [IO.File]::OpenRead($path)
+        try { return ([BitConverter]::ToString($sha.ComputeHash($fs)) -replace '-', '') }
+        finally { $fs.Dispose(); $sha.Dispose() }
+    }
     # "v2.61.2" / "2.61.2" / "2.61.2.0" -> Version de 4 partes: se compara como VERSION (9.9.10 es mayor que 9.9.9), no como texto. $null si no lo parece.
     function ConvertTo-Ver([string]$text) {
         $m = [regex]::Match(([string]$text).Trim(), '^[vV]?(\d+)\.(\d+)(?:\.(\d+))?(?:\.(\d+))?')
@@ -235,7 +243,7 @@ function Install-Verdesk {
         $file = Join-Path $dir ([string]$asset.name)
         Get-File $asset.browser_download_url $file ([long]$asset.size)
 
-        $got = (Get-FileHash -Path $file -Algorithm SHA256).Hash
+        $got = Get-Sha256 $file
         if ($got -ne $want) {
             Remove-Item -Path $dir -Recurse -Force -ErrorAction SilentlyContinue
             Fail 'La descarga no coincide con la huella (SHA256) que publica GitHub. No se instalo nada.' 'The download does not match the SHA256 that GitHub publishes. Nothing was installed.'
