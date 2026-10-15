@@ -148,3 +148,23 @@
   .hero { padding-block: 8px 72px; }
   @media (max-width: 780px) { .beam { height: 118px; } .beam svg { transform: scale(.62); transform-origin: 0 0; } }
   @media (max-width: 520px) { .beam { height: 98px; } .beam svg { transform: scale(.5); } .hero { padding-block: 0 48px; } }
+
+  /* ct-2026-10-14-1013: instalar — el comando primero, el .exe como alternativa */
+  .way { display: grid; gap: 10px; max-width: 72ch; }
+  .way h3 { font-family: var(--display); font-weight: 600; font-size: 19px; line-height: 1.25; margin: 0; }
+  .way p { margin: 0; color: var(--ink-2); font-size: 16px; }
+  .way p a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--line-2); text-underline-offset: 3px; }
+  .way p a:hover { text-decoration-color: var(--ink-2); }
+  .way .way-note { font-size: 14px; }
+  .cmd { display: flex; align-items: stretch; max-width: 520px; border: 1px solid var(--line-2); border-radius: 6px; }
+  .cmd code { flex: 1; min-width: 0; padding: 12px 14px; font-family: var(--mono); font-size: 14px; color: var(--ink); white-space: nowrap; overflow-x: auto; user-select: all; }
+  .copy-btn { flex: none; font: inherit; font-size: 14px; color: var(--green); background: transparent; border: 0; border-left: 1px solid var(--line-2); border-radius: 0 6px 6px 0; padding: 0 16px; cursor: pointer; }
+  .copy-btn:hover, .copy-btn:focus-visible { background: var(--green); color: #04130B; }
+  .copy-btn:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
+  .shots { display: grid; grid-template-columns: repeat(2, minmax(0, 520px)); gap: 16px; align-items: start; }
+  .shot { margin: 0; display: flex; gap: 12px; align-items: flex-start; }
+  .shot .n { flex: none; width: 26px; height: 26px; border: 1px solid var(--line-2); border-radius: 4px; color: #28E08C; font-family: var(--mono); font-size: 13px; display: grid; place-items: center; }
+  .shot img { display: block; flex: 1 1 0; min-width: 0; max-width: 100%; height: auto; border: 1px solid var(--line-2); border-radius: 6px; }
+  @media (max-width: 780px) { .shots { grid-template-columns: minmax(0, 520px); } }
+  @media (max-width: 520px) { .shot { flex-direction: column; gap: 8px; } .shot img { flex: none; width: 100%; } }
+  @media (max-width: 520px) { .cmd code { font-size: 13px; white-space: normal; overflow-wrap: anywhere; } }

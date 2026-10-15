@@ -1,6 +1,6 @@
 # Verdesk
 
-> Local MCP server for Windows. Your AI agents use your PC and browse any page. Free for personal use; Pro adds action scripting, remote PCs and commercial use (full Pro free for the first 60 days).
+> Local MCP server for Windows. Your AI agents use your PC and browse any page. Free for personal use; Pro adds action scripting, access from other computers and commercial use (full Pro free for the first 60 days; one license works on up to 2 computers).
 
 Verdesk is a single-executable MCP server that runs on your own Windows 10/11 machine and works with any MCP client and any model (tested on Claude Code). It drives both the browser and desktop programs.
 
@@ -18,7 +18,7 @@ Verdesk is a single-executable MCP server that runs on your own Windows 10/11 ma
 - Optional sounds: a cue when an agent connects or acts; can be turned off in Settings.
 - Action scripting (Pro): record a desktop task once and repeat it with a single call.
 - Mini button captures (Pro): save a button once; the agent finds it on screen and presses it, even without text.
-- Remote PCs (Pro): control other machines over an SSH tunnel with your own keys, no third-party broker.
+- Access from other computers (Pro): reach this Verdesk from another computer over an SSH tunnel with your own keys, no third-party broker.
 
 ## Examples
 
@@ -26,6 +26,7 @@ Paperwork on web portals; Windows programs without an API; extracting data from 
 
 ## Links
 
-- Download: https://github.com/clevercat64/verdesk/releases/latest
+- Install (PowerShell): `irm https://verdesk.app/install | iex`. It downloads the latest installer (about 230 MB) and checks its SHA-256 fingerprint before opening it.
+- Or download the installer: https://github.com/clevercat64/verdesk/releases/latest
 - Skill for AI agents: https://github.com/clevercat64/verdesk-skill
 - Made by CLEVER.CAT (Camilo Brossard): https://clever.cat

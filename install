@@ -1,0 +1,277 @@
+# Verdesk - instalador de una linea (ct-2026-10-14-100251). Es el instalador de CleverCoder (clevercoder.app/install) adaptado a Verdesk.
+#   irm https://verdesk.app/install | iex
+# (este archivo se publica SIN extension, como /install: GitHub Pages no reescribe URLs)
+# Baja el Setup de la ultima release publicada en GitHub (clevercat64/verdesk), con la URL de ESA version, comprueba su SHA256
+# (el que publica GitHub; si no, el de SHA256SUMS.txt de la misma release) y lo ejecuta. Windows PowerShell 5.1 y PowerShell 7. Solo ASCII.
+# Si no se puede comprobar la huella NO se instala nada (el actualizador de Verdesk hace lo mismo).
+# Muestra el avance de la descarga en una sola linea (porcentaje y MB). Al terminar la ventana se cierra sola SOLO si se abrio para esto
+# (su historial esta vacio: este es el primer comando que corre); en una sesion con mas trabajo no cierra nada. VERDESK_INSTALL_NOCLOSE=1 nunca la cierra.
+# Sin Verdesk instalado abre el instalador de Verdesk (el mismo que se baja del sitio): la persona ve sus pantallas y el instalador abre Verdesk al terminar.
+# Con Verdesk ya instalado (clave Uninstall\Verdesk de HKCU, la que lee el Setup): si tiene la MISMA version o una mas nueva no baja nada
+# ("Ya tienes Verdesk X, la ultima."); si es mas vieja actualiza con los MISMOS argumentos que el actualizador de Verdesk (/S /R /UPDATE) y MIDE el
+# resultado: la version del verdesk.exe que quedo y update-failed.txt (lo escribe hooks.nsh). Nunca dice que actualizo sin haberlo medido.
+# Para pruebas: VERDESK_INSTALL_NOEXEC=1 baja y comprueba, pero no ejecuta el Setup. VERDESK_INSTALL_API=<url> cambia la API de releases;
+# VERDESK_INSTALL_UNINSTKEY=<ruta de registro> y VERDESK_INSTALL_DATADIR=<carpeta> cambian donde busca la instalacion y update-failed.txt (solo pruebas).
+function Install-Verdesk {
+    $ErrorActionPreference = 'Stop'
+    $ProgressPreference = 'SilentlyContinue'
+    $es = ([Globalization.CultureInfo]::CurrentUICulture.TwoLetterISOLanguageName -eq 'es')
+    $redirected = $false
+    try { $redirected = [Console]::IsOutputRedirected } catch { }
+    function Pick([string]$spanish, [string]$english) { if ($es) { return $spanish } else { return $english } }
+    function Say([string]$spanish, [string]$english, [string]$mark = '>') {
+        $markColor = 'Green'
+        if ($mark -eq '!') { $markColor = 'Yellow' }
+        Write-Host '  ' -NoNewline
+        Write-Host $mark -NoNewline -ForegroundColor $markColor
+        Write-Host (' ' + (Pick $spanish $english))
+    }
+    # Solo el signo va en rojo; el texto en el color normal de la consola (el rojo sobre el azul de la consola clasica no llega a 4,5:1). Y una linea que dice que hacer.
+    function Fail([string]$spanish, [string]$english) {
+        Write-Host '  ' -NoNewline
+        Write-Host '!' -NoNewline -ForegroundColor Red
+        Write-Host (' ' + (Pick $spanish $english))
+        Write-Host ('    ' + (Pick 'Reintenta en un rato. Si sigue, escribe a support@verdesk.app.' 'Try again in a while. If it continues, write to support@verdesk.app.'))
+    }
+    function Banner {
+        Write-Host ''
+        Write-Host '   /\_/\   ' -NoNewline -ForegroundColor Green
+        Write-Host 'Verdesk' -ForegroundColor White
+        Write-Host '  ( o.o )  ' -NoNewline -ForegroundColor Green
+        Write-Host 'by CleverCat' -ForegroundColor Gray
+        Write-Host '   > ^ <   ' -NoNewline -ForegroundColor Green
+        Write-Host 'verdesk.app' -ForegroundColor Gray
+        Write-Host ''
+    }
+    # Una sola linea que se reescribe: "  > Descargando  [#####-----]  42%  48 / 115 MB". Termina con "+ Descargado".
+    function Show-Progress([long]$read, [long]$total, [bool]$done) {
+        $pct = 0
+        if ($total -gt 0) { $pct = [int][math]::Floor(100 * $read / $total) }
+        if ($pct -gt 100) { $pct = 100 }
+        $w = 0
+        try { $w = $Host.UI.RawUI.WindowSize.Width } catch { }
+        if ($w -lt 40) { $w = 80 }
+        $barW = [math]::Max(10, [math]::Min(30, $w - 44))
+        $fill = [int][math]::Floor($barW * $pct / 100)
+        $bar = ('#' * $fill) + ('-' * ($barW - $fill))
+        $label = if ($done) { Pick 'Descargado ' 'Downloaded  ' } else { Pick 'Descargando' 'Downloading' }
+        $mbRead = [math]::Round($read / 1MB)
+        $mbTotal = [math]::Round($total / 1MB)
+        $amount = if ($done) { "$mbTotal MB" } else { "$mbRead / $mbTotal MB" }
+        $amount = $amount.PadRight("$mbTotal / $mbTotal MB".Length)   # la linea final es mas corta que las de avance: sin relleno quedarian restos de la anterior
+        Write-Host "`r  " -NoNewline
+        Write-Host $(if ($done) { '+' } else { '>' }) -NoNewline -ForegroundColor Green
+        Write-Host (' ' + $label + '  [') -NoNewline
+        Write-Host $bar -NoNewline -ForegroundColor Green
+        Write-Host ('] ' + ([string]$pct).PadLeft(3) + '%  ' + $amount + '   ') -NoNewline
+        if ($done) { Write-Host '' }
+    }
+    function Get-File([string]$url, [string]$path, [long]$total) {
+        $req = [Net.HttpWebRequest]::Create($url)
+        $req.UserAgent = 'verdesk-install'
+        $req.ReadWriteTimeout = 60000
+        $resp = $req.GetResponse()
+        try {
+            if ($resp.ContentLength -gt 0) { $total = $resp.ContentLength }
+            $in = $resp.GetResponseStream()
+            $out = [IO.File]::Create($path)
+            try {
+                $buf = New-Object byte[] 65536
+                $read = [long]0
+                $sw = [Diagnostics.Stopwatch]::StartNew()
+                $drew = $false
+                $finished = $false
+                if (-not $redirected) { try { [Console]::CursorVisible = $false } catch { } }
+                while ($true) {
+                    try { $n = $in.Read($buf, 0, $buf.Length) } catch { throw (Pick 'Se perdio la conexion' 'The connection was lost') }
+                    if ($n -le 0) { break }
+                    $out.Write($buf, 0, $n)
+                    $read += $n
+                    if (-not $redirected -and $sw.ElapsedMilliseconds -ge 100) { Show-Progress $read $total $false; $drew = $true; $sw.Restart() }
+                }
+                if ($total -gt 0 -and $read -ne $total) { throw (Pick 'La descarga se corto antes de terminar' 'The download was cut short') }
+                if ($redirected) { Say 'Descargado' 'Downloaded' '+' } else { Show-Progress $total $total $true }
+                $finished = $true
+            }
+            finally {
+                $out.Dispose()
+                if (-not $redirected) {
+                    try { [Console]::CursorVisible = $true } catch { }
+                    if ($drew -and -not $finished) { Write-Host '' }   # el error no se pega al final de la linea de avance
+                }
+            }
+        }
+        finally { $resp.Close() }
+    }
+    # La huella (SHA256) esperada del Setup: la que publica GitHub en la release (digest) o, si no la trae, la de SHA256SUMS.txt de la MISMA release
+    # (formato "<64 hex>  <archivo>", el de sha256sum). Devuelve '' si no hay ninguna: quien llama no instala nada.
+    function Get-ExpectedHash($release, $asset) {
+        $digest = [string]$asset.digest
+        if ($digest -match '^sha256:([0-9a-fA-F]{64})$') { return $Matches[1] }
+        $sums = @($release.assets | Where-Object { $_.name -eq 'SHA256SUMS.txt' })[0]
+        if ($sums -and $sums.browser_download_url) {
+            try {
+                $text = [string](Invoke-RestMethod -Uri $sums.browser_download_url -Headers @{ 'User-Agent' = 'verdesk-install' } -UseBasicParsing)
+                foreach ($line in ($text -split "`n")) {
+                    if ($line.Trim() -match '^([0-9a-fA-F]{64})\s+\*?(.+)$' -and $Matches[2].Trim() -eq $asset.name) { return $Matches[1] }
+                }
+            }
+            catch { }
+        }
+        return ''
+    }
+    # "v2.61.2" / "2.61.2" / "2.61.2.0" -> Version de 4 partes: se compara como VERSION (9.9.10 es mayor que 9.9.9), no como texto. $null si no lo parece.
+    function ConvertTo-Ver([string]$text) {
+        $m = [regex]::Match(([string]$text).Trim(), '^[vV]?(\d+)\.(\d+)(?:\.(\d+))?(?:\.(\d+))?')
+        if (-not $m.Success) { return $null }
+        try {
+            $n = @(0, 0, 0, 0)
+            for ($i = 1; $i -le 4; $i++) { if ($m.Groups[$i].Success) { $n[$i - 1] = [int]$m.Groups[$i].Value } }
+            return New-Object System.Version -ArgumentList $n[0], $n[1], $n[2], $n[3]
+        }
+        catch { return $null }
+    }
+    # La version sin el cero final de la 4.a parte: 2.61.2.0 -> 2.61.2 (asi la escribe el Setup en DisplayVersion).
+    function Show-Ver([Version]$v) { if ($v.Revision -le 0) { return ('{0}.{1}.{2}' -f $v.Major, $v.Minor, [math]::Max(0, $v.Build)) } else { return $v.ToString() } }
+    # Lo que ve el Setup de una instalacion previa (installer.nsi:213-224): la clave Uninstall\Verdesk de HKCU; hay instalacion si trae UninstallString. DisplayVersion lleva
+    # 3 partes ("2.61.2") y InstallLocation viene ENTRE COMILLAS. $null si no hay instalacion; con Version $null si DisplayVersion no es una version.
+    function Get-Installed {
+        $key = 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\Verdesk'
+        if ($env:VERDESK_INSTALL_UNINSTKEY) { $key = $env:VERDESK_INSTALL_UNINSTKEY }
+        $k = $null
+        try { $k = Get-ItemProperty -LiteralPath $key -ErrorAction Stop } catch { return $null }
+        if (-not ([string]$k.UninstallString).Trim()) { return $null }
+        $text = ([string]$k.DisplayVersion).Trim()
+        return [pscustomobject]@{ Text = $text; Version = (ConvertTo-Ver $text); Dir = ([string]$k.InstallLocation).Trim().Trim('"') }
+    }
+    # Despues del Setup en silencio NO se da nada por hecho: se mide la version del verdesk.exe que quedo (las 4 partes binarias, las que compara el hook de
+    # hooks.nsh) y se lee update-failed.txt (reason=locked|not_updated|unreadable), que el hook escribe si no actualizo. Solo vale si se escribio en ESTA corrida.
+    function Get-UpdateResult([string]$installDir, [Version]$want, [int]$code, [datetime]$since) {
+        $now = $null
+        try {
+            $vi = (Get-Item -LiteralPath (Join-Path $installDir 'verdesk.exe') -ErrorAction Stop).VersionInfo
+            $now = New-Object System.Version -ArgumentList $vi.FileMajorPart, $vi.FileMinorPart, $vi.FileBuildPart, $vi.FilePrivatePart
+        }
+        catch { }
+        if ($now -and $now -eq $want) { return [pscustomobject]@{ Ok = $true; Reason = '' } }
+        $reason = ''
+        $dataDir = Join-Path $env:APPDATA 'verdesk'
+        if ($env:VERDESK_INSTALL_DATADIR) { $dataDir = $env:VERDESK_INSTALL_DATADIR }
+        try {
+            $f = Get-Item -LiteralPath (Join-Path $dataDir 'update-failed.txt') -ErrorAction Stop
+            if ($f.LastWriteTime -ge $since) {
+                foreach ($line in (Get-Content -LiteralPath $f.FullName)) {
+                    if ($line -match '^reason=(.+)$') {
+                        $r = $Matches[1].Trim()
+                        if ($r -eq 'locked') { $reason = Pick 'verdesk.exe seguia abierto y no se pudo reemplazar' 'verdesk.exe was still open and could not be replaced' }
+                        elseif ($r -eq 'not_updated') { $reason = Pick 'el archivo instalado no es el nuevo' 'the installed file is not the new one' }
+                        elseif ($r -eq 'unreadable') { $reason = Pick 'no se pudo leer la version instalada' 'the installed version could not be read' }
+                        else { $reason = $r }
+                    }
+                }
+            }
+        }
+        catch { }
+        if (-not $reason) {
+            if ($code -ne 0) { $reason = Pick "el instalador termino con el codigo $code" "the installer ended with code $code" }
+            elseif ($now) { $reason = Pick ('la version instalada sigue siendo ' + (Show-Ver $now)) ('the installed version is still ' + (Show-Ver $now)) }
+            else { $reason = Pick 'no se pudo leer la version instalada' 'the installed version could not be read' }
+        }
+        return [pscustomobject]@{ Ok = $false; Reason = $reason }
+    }
+    # Cierra la ventana SOLO si se abrio para esto: consola normal (no ISE), sin VERDESK_INSTALL_NOCLOSE y con el historial de la sesion VACIO: el comando que esta
+    # corriendo todavia no cuenta (medido: Get-History da 0 en el primer comando de una sesion nueva y 1 en el siguiente). Con mas trabajo en la sesion no se
+    # toca: podria ser de otra cosa. Con irm | iex el script corre DENTRO de la consola del usuario.
+    function Close-IfOwn {
+        $own = $false
+        try { $own = ($env:VERDESK_INSTALL_NOCLOSE -ne '1') -and ($Host.Name -eq 'ConsoleHost') -and (@(Get-History).Count -eq 0) } catch { }
+        if (-not $own) { Say 'Listo. Ya puedes cerrar esta ventana.' 'Done. You can close this window now.' '+'; return }
+        Say 'Listo. Cerrando esta ventana...' 'Done. Closing this window...' '+'
+        Start-Sleep -Seconds 3
+        exit
+    }
+    $dir = $null
+    try {
+        # Windows PowerShell 5.1 negocia TLS 1.0 por defecto y GitHub lo rechaza.
+        [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
+        $api = 'https://api.github.com/repos/clevercat64/verdesk/releases/latest'
+        if ($env:VERDESK_INSTALL_API) { $api = $env:VERDESK_INSTALL_API }
+        # El nombre del Setup lleva la version (Verdesk_2.61.2_x64-setup.exe): se elige por patron.
+        $assetPattern = '^Verdesk_[0-9][0-9A-Za-z.\-]*_x64-setup\.exe$'
+
+        Banner
+        Say 'Buscando la ultima version...' 'Looking for the latest version...'
+        $release = Invoke-RestMethod -Uri $api -Headers @{ 'User-Agent' = 'verdesk-install'; 'Accept' = 'application/vnd.github+json' } -UseBasicParsing
+        $asset = @($release.assets | Where-Object { $_.name -match $assetPattern })[0]
+        if (-not $asset -or -not $asset.browser_download_url) {
+            Fail 'La ultima version no trae el instalador. Descargalo en https://verdesk.app' 'The latest version has no installer. Download it from https://verdesk.app'
+            return
+        }
+        $version = [string]$release.tag_name
+        $verText = $version.TrimStart('v', 'V')
+        $latest = ConvertTo-Ver $version
+        # Verdesk ya instalado: con la misma version o una mas nueva no hay nada que bajar. Con una mas vieja se actualiza en silencio, pero SOLO si se puede medir
+        # el resultado (version legible y verdesk.exe en la carpeta de la instalacion); si no, se abre el instalador interactivo, que sabe resolver una reinstalacion.
+        $installed = Get-Installed
+        $update = $false
+        if ($installed -and $installed.Version -and $latest) {
+            if ($installed.Version -ge $latest) {
+                Say "Ya tienes Verdesk $($installed.Text), la ultima." "You already have Verdesk $($installed.Text), the latest." '+'
+                return
+            }
+            if ($installed.Dir -and (Test-Path -LiteralPath (Join-Path $installed.Dir 'verdesk.exe'))) { $update = $true }
+        }
+        $mb = [math]::Round($asset.size / 1MB)
+        if ($update) { Say "Actualizando Verdesk $($installed.Text) -> $verText ($mb MB)..." "Updating Verdesk $($installed.Text) -> $verText ($mb MB)..." }
+        else { Say "Version $version ($mb MB)" "Version $version ($mb MB)" }
+
+        $want = Get-ExpectedHash $release $asset
+        if (-not $want) {
+            Fail 'GitHub no publica la huella (SHA256) de esta version: no se pudo comprobar la descarga. No se instalo nada.' 'GitHub does not publish the SHA256 of this version: the download could not be verified. Nothing was installed.'
+            return
+        }
+        $dir = Join-Path ([IO.Path]::GetTempPath()) ('Verdesk-install-' + [guid]::NewGuid().ToString('N').Substring(0, 8))
+        $null = New-Item -ItemType Directory -Path $dir
+        $file = Join-Path $dir ([string]$asset.name)
+        Get-File $asset.browser_download_url $file ([long]$asset.size)
+
+        $got = (Get-FileHash -Path $file -Algorithm SHA256).Hash
+        if ($got -ne $want) {
+            Remove-Item -Path $dir -Recurse -Force -ErrorAction SilentlyContinue
+            Fail 'La descarga no coincide con la huella (SHA256) que publica GitHub. No se instalo nada.' 'The download does not match the SHA256 that GitHub publishes. Nothing was installed.'
+            return
+        }
+        Say 'Huella SHA256 comprobada' 'SHA256 checked' '+'
+
+        if ($env:VERDESK_INSTALL_NOEXEC -eq '1') { Say "Listo (sin ejecutar): $file" "Done (not run): $file" '+'; return }
+
+        # Se espera solo al Setup, no a lo que este lance (Start-Process -Wait espera tambien a los hijos).
+        if ($update) {
+            # Los MISMOS argumentos que el actualizador de Verdesk (updater.rs NSIS_SILENT_ARGS): en silencio, relanza Verdesk y trata la instalacion como una actualizacion.
+            $since = (Get-Date).AddSeconds(-2)
+            $p = Start-Process -FilePath $file -ArgumentList @('/S', '/R', '/UPDATE') -PassThru
+            $p.WaitForExit()
+            $code = [int]$p.ExitCode
+            Remove-Item -Path $dir -Recurse -Force -ErrorAction SilentlyContinue
+            $res = Get-UpdateResult $installed.Dir $latest $code $since
+            if (-not $res.Ok) {
+                Fail ('No se pudo actualizar: ' + $res.Reason + '.') ('Could not update: ' + $res.Reason + '.')
+                return
+            }
+            Say "Actualizado a $verText" "Updated to $verText" '+'
+            Close-IfOwn
+            return
+        }
+        Say 'Abriendo el instalador...' 'Opening the installer...'
+        $p = Start-Process -FilePath $file -PassThru
+        $p.WaitForExit()
+        Remove-Item -Path $dir -Recurse -Force -ErrorAction SilentlyContinue
+        Close-IfOwn
+    }
+    catch {
+        if ($dir) { Remove-Item -Path $dir -Recurse -Force -ErrorAction SilentlyContinue }   # no deja una descarga a medias en la carpeta temporal
+        $why = ([string]$_.Exception.Message).Trim().TrimEnd('.')
+        Fail ("No se pudo instalar: " + $why + ".") ("Could not install: " + $why + ".")
+    }
+}
+Install-Verdesk
