@@ -1,117 +1,178 @@
 VERDESK - END USER LICENSE AGREEMENT
 
-Version 1.3 - Effective 2026-10-12
+Version 1.4 - Effective from Verdesk 2.62.0
 
-This End User License Agreement ("Agreement") is a legal agreement between you
-("you", the "User") and Camilo Brossard ("Verdesk", "we", "us"), for the
-Verdesk software, including its executable, libraries, documentation and any
-updates (the "Software").
+This is not a contract full of fine print: it is written to be understood. If
+you install or use Verdesk, you accept this agreement. If you do not agree, do
+not install or use it.
 
-BY INSTALLING, COPYING OR USING THE SOFTWARE YOU AGREE TO BE BOUND BY THIS
-AGREEMENT. IF YOU DO NOT AGREE, DO NOT INSTALL OR USE THE SOFTWARE.
-
-
-1. LICENSE GRANT
-
-   1.1 Free tier. Verdesk grants you a personal, non-exclusive,
-       non-transferable license to install and use the Software free of charge
-       for personal, educational and other NON-COMMERCIAL purposes.
-
-   1.2 Pro tier. A valid Verdesk Pro license key unlocks the Pro features and
-       grants a license for COMMERCIAL use, limited to the number of developers
-       and device activations stated at the time of purchase. The license key
-       is personal to you and must not be shared, published or resold.
+This agreement is between you and Camilo Brossard, who develops and sells
+Verdesk ("Verdesk", "we", "us").
 
 
-2. OWNERSHIP
+1. WHAT VERDESK IS AND WHAT YOU ARE BUYING
 
-The Software is licensed, not sold. Verdesk retains all right, title and
-interest in and to the Software, including all intellectual property rights.
-This Agreement grants you no rights other than the limited license set out
-above.
+Verdesk is a Windows program that lets an AI, or another program, see and
+operate your computer: it looks at the screen, reads text, clicks, types, drives
+a web browser and runs commands.
 
+   - Free. No charge, for personal use, study and any other use that is not
+     commercial.
+   - Pro. A monthly subscription of USD 2.90. It is paid with PayPal at
+     pay.verdesk.app and renews by itself every month until you cancel it. It
+     adds the Pro features (macros, saved buttons and objects, drafts and access
+     from other computers: Local (LAN) and Remote (WAN)) and the right to
+     commercial use.
+   - Up to 2 of your own computers per license. If you change computers, you can
+     release your computers once every 30 days.
+   - Trial. For the first 60 days you get full Pro, with no card and without
+     asking for it. When it ends, Verdesk keeps working as Free.
+   - If you cancel or a payment fails, your license stays Pro until the end of
+     the period you already paid for, plus 7 days of margin. After that Verdesk
+     goes back to Free. Nothing of yours is deleted.
+   - You are buying the right to use Verdesk, not the program itself: the
+     program remains ours.
 
-3. RESTRICTIONS
+2. VERDESK IS UNDER DEVELOPMENT
 
-You may NOT, in whole or in part:
-   (a) reverse engineer, decompile or disassemble the Software, except to the
-       extent this restriction is prohibited by applicable law;
-   (b) sell, rent, lease, sublicense, redistribute or otherwise make the
-       Software available to any third party;
-   (c) remove, disable, bypass or circumvent the license verification, or use
-       the Pro features without a valid license key;
-   (d) use the Free tier for any commercial purpose;
-   (e) remove or alter any proprietary notices in the Software.
-
-
-4. NATURE OF THE SOFTWARE - USE AT YOUR OWN RISK
-
-Verdesk is infrastructure that lets AI agents and other software OBSERVE and
-CONTROL the desktop on the machine where it runs - including clicking, typing,
-sending keystrokes and running commands. You are solely
-responsible for:
-   (a) which clients, AI agents or models you connect to Verdesk;
-   (b) every action those agents or clients perform through Verdesk; and
-   (c) operating Verdesk only on machines and accounts you are authorized to
-       use.
-You must not use the Software for any unlawful purpose, to access systems or
-data without authorization, or in any way that infringes the rights of others.
+It will have bugs and some things will change. We publish fixes often, and
+Verdesk tells you when a new version is available. If something breaks, write to
+us.
 
 
-5. NO WARRANTY
+3. WHAT VERDESK SEES STAYS ON YOUR COMPUTER
 
-THE SOFTWARE IS PROVIDED "AS IS" AND "AS AVAILABLE", WITHOUT WARRANTY OF ANY
-KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, ACCURACY AND
-NON-INFRINGEMENT. VERDESK DOES NOT WARRANT THAT THE SOFTWARE WILL BE ERROR-FREE,
-UNINTERRUPTED OR SECURE, OR THAT ANY DEFECTS OR BUGS WILL BE CORRECTED. YOU
-ASSUME THE ENTIRE RISK ARISING OUT OF THE USE OR PERFORMANCE OF THE SOFTWARE.
+What Verdesk sees and does (screenshots, text it reads, windows, clipboard,
+activity history, macros, objects and remembered passwords) is stored on your
+computer, and Verdesk does not send it anywhere. There is no telemetry, no
+analytics, no account and no sign-in.
 
+The only things that leave your computer are these:
 
-6. LIMITATION OF LIABILITY
+   1. The first-run sign-up. When you finish the welcome screens, your email,
+      the version, the license type and a random identifier of this computer go
+      to pay.verdesk.app, which forwards them to us by email, to the Verdesk
+      mailbox and to its owner's mailbox. It happens once, and the email is
+      required to finish the welcome screens.
+   2. Reports. Only when you, or the AI you connected, send a report: the report
+      text, its type, the version and the computer name. The connected AI can
+      send a report on its own; it writes the text.
+   3. A paid license. When you activate it, and afterwards only when needed
+      (more than 7 days without checking, close to expiry, or after a notice
+      from the server), Verdesk sends pay.verdesk.app your license, which
+      carries your purchase email, the plan and the expiry date, and a computer
+      identifier calculated with a hash, never the Windows one. The trial and
+      Free never contact the license server. Without a connection, Verdesk keeps
+      working.
+   4. Updates. When it starts and every 24 hours, Verdesk asks GitHub which
+      version is the latest; GitHub sees your IP address and your version. This
+      check cannot be turned off: it is how fixes reach you in time. If you
+      choose to install, Verdesk downloads the installer from GitHub and checks
+      its fingerprint before opening it.
+   5. Only if you turn on Local (LAN) or Remote (WAN). If OpenSSH is missing,
+      Verdesk downloads it from GitHub (Microsoft's build) or installs it
+      through Windows Update. In Remote, if you choose to install Tailscale, it
+      downloads it from Tailscale. In both cases it checks the installer's
+      signature before using it. In Remote, Verdesk also asks api.ipify.org for
+      your public IP and asks your router (via UPnP) to open port 22 to this
+      computer; while Remote stays on it checks every 30 minutes that the port
+      is still open, and it closes it when you leave Remote, when you close it
+      from Connection and when you uninstall.
 
-TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, VERDESK AND CAMILO BROSSARD
-SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL OR
-PUNITIVE DAMAGES, NOR FOR ANY LOSS OF DATA, PROFITS, REVENUE OR BUSINESS, NOR
-FOR ANY DAMAGE CAUSED BY OR THROUGH THE ACTIONS OF ANY AI AGENT OR SOFTWARE
-CONNECTED TO THE SOFTWARE, ARISING OUT OF OR RELATED TO THE SOFTWARE OR THIS
-AGREEMENT, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. IN ANY EVENT,
-THE TOTAL AGGREGATE LIABILITY OF VERDESK UNDER THIS AGREEMENT SHALL NOT EXCEED
-THE AMOUNT YOU ACTUALLY PAID FOR THE SOFTWARE (OR ZERO, FOR THE FREE TIER).
-
-
-7. TERMINATION
-
-This Agreement is effective until terminated. It terminates automatically,
-without notice, if you breach any of its terms. Upon termination you must stop
-using the Software and remove all copies. Sections 2 through 6 survive
-termination.
-
-
-8. UPDATES
-
-Any updates Verdesk provides become part of the Software and are governed by
-this Agreement unless accompanied by separate terms.
-
-
-9. GOVERNING LAW
-
-This Agreement is governed by the laws of Chile, without regard to its conflict
-of law rules.
-
-
-10. ENTIRE AGREEMENT
-
-This Agreement is the entire agreement between you and Verdesk regarding the
-Software and supersedes any prior agreement or understanding. If any provision
-is found unenforceable, the remaining provisions remain in full force.
+Whatever the browser driven by Verdesk loads is what you or the AI ask it to
+load: it is your browsing, not something Verdesk sends. Verdesk does not read
+the cookies or the history of your browsers.
 
 
-CONTACT
+4. THE AI YOU CONNECT BELONGS TO SOMEONE ELSE
 
-Verdesk - Camilo Brossard
-camilo.brossard@gmail.com
-https://verdesk.app
+The AI you connect (Claude, ChatGPT, a model on your own computer or any other)
+receives what Verdesk shows it: screenshots, text and pages. If that AI runs in
+the cloud, that content leaves through its own program, under its own rules and
+prices. We do not control what it does with it and we are not responsible for
+its answers.
+
+You choose which AI to connect, and you are responsible for what it does with
+your computer through Verdesk. Review what it does, especially before anything
+that cannot be undone.
+
+In Local (LAN) and Remote (WAN), other computers can connect to this one. The
+first connection from each computer asks for your approval, and Remote only lets
+in a computer with a key. The connection text you copy for your AI contains what
+is needed to get in: share it only with your own AI.
+
+
+5. WHAT STAYS ON YOUR COMPUTER WHEN YOU UNINSTALL
+
+When you uninstall, Verdesk removes what it opened: the firewall rules, the
+router port and remote access.
+
+Your license and your settings are kept on purpose, so you do not lose them if
+you reinstall, and so is the 60-day trial marker, stored in several places on
+your computer so that the trial cannot be repeated by reinstalling.
+
+Your macros and objects, in Documents\Verdesk, are kept unless you agree to
+delete them when the uninstaller asks.
+
+
+6. WHAT YOU MAY NOT DO
+
+   - Use Free for commercial work.
+   - Resell, rent, lend or share your license or your key.
+   - Bypass, disable or trick the license or trial check, or use the Pro
+     features without a license.
+   - Decompile or reverse engineer the program, except where the law allows you
+     to.
+   - Use Verdesk on computers or accounts you are not allowed to use, to access
+     systems or data without authorization, or for anything illegal.
+
+If any of this happens, the license is cancelled without a refund.
+
+
+7. REFUNDS
+
+You have 14 days from your first purchase to ask for your money back. Write to
+support@verdesk.app from the email you bought with and we refund you through
+PayPal; you do not need to explain anything. When we refund your first purchase
+we also cancel your subscription, so you are not charged again. Renewals are not
+refunded, except for a charge made by mistake (for example, a duplicate one or
+one made after you cancelled), which is refunded in full.
+
+
+8. HOW FAR OUR RESPONSIBILITY GOES
+
+We build this with care, but Verdesk is provided as is, without warranties of
+any kind: we cannot guarantee that it works without failures on every computer
+or in every case.
+
+If something goes wrong through our fault, our liability is limited to what you
+paid (on Free, nothing). We are not liable for lost data or work, time or
+profits that did not happen, or for anything done by an AI or a program
+connected to Verdesk.
+
+Back up your work. That holds for any tool, not only this one.
+
+
+9. CHANGES TO THIS AGREEMENT
+
+If we change something important, we publish the new version with its date and
+say so in the release notes. If you do not agree, you can cancel your
+subscription and stop using Verdesk.
+
+
+10. GOVERNING LAW
+
+This agreement is governed by the laws of Chile. If any part is not valid, the
+rest remains valid. It is the entire agreement between you and Verdesk about the
+program.
+
+
+11. CONTACT
+
+support@verdesk.app - https://verdesk.app
+
+Write to us about anything: problems, licenses, or if you need to move your
+license to another computer.
 
 
 CHANGELOG (internal)
@@ -123,3 +184,6 @@ v1.2 (2026-05-27) - Licensor named directly as Verdesk (operated by Camilo
                     Brossard); removed prior third-party brand references.
 v1.3 (2026-10-12) - Section 4: running commands is no longer described as a
                     Pro-tier feature (it is available in the Free tier too).
+v1.4 (Verdesk 2.62.0) - Rewritten in plain language: monthly subscription,
+                    trial, data that leaves the computer, refunds, what stays
+                    after uninstalling; contact support@verdesk.app.
