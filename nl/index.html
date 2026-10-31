@@ -163,6 +163,53 @@
       </ul>
     </section>
 
+    <section class="band" id="macros">
+      <div class="mx-head"><h2 class="label" data-i18n="sec.macros">Macro's</h2><span class="pro">PRO</span></div>
+      <p class="mx-lede" data-i18n="mac.lede">Een macro bewaart een taak die je al hebt gedaan. De AI vraagt erom met één regel en Verdesk herhaalt hem.</p>
+      <div class="mx-card mx-run">
+        <div class="mx-ask">
+          <h3 class="mx-chip" data-i18n="mac.ask.t">Wat de AI vraagt</h3>
+          <pre class="mx-code"><code>subir_factura({ archivo: "C:/facturas/mayo.pdf" })</code></pre>
+          <p class="mx-cap" data-i18n="mac.ask.cap">Een macro met instructies verschijnt als een tool met een eigen naam. Zonder wachtwoorden, selectors of wachttijden.</p>
+          <h3 class="mx-chip" data-i18n="mac.back.t">Wat ze terugkrijgt</h3>
+          <pre class="mx-code"><code>{ ok: true, executed, total, report }</code></pre>
+          <p class="mx-cap" data-i18n="mac.back.cap">Een rapport met het resultaat van elke stap. Nooit het wachtwoord.</p>
+        </div>
+        <div class="mx-sep" aria-hidden="true"></div>
+        <div class="mx-do">
+          <h3 class="mx-chip go" data-i18n="mac.do.t">Wat Verdesk zelf doet</h3>
+          <ol class="steps mx-steps">
+            <li><b data-i18n="mac.s1.t">Opent de site</b><span data-i18n="mac.s1.d">Gaat naar de inlogpagina.</span></li>
+            <li><b data-i18n="mac.s2.t">Kijkt of je al binnen bent</b><span data-i18n="mac.s2.d">Als de macro die controle bevat en de sessie open is, slaat hij het inloggen over. Zo niet, dan logt hij eerst in.</span></li>
+            <li><b data-i18n="mac.s3.t">Vindt elk veld</b><span data-i18n="mac.s3.d">Zoekt het op selector, rol en naam en wacht tot 8 s tot het verschijnt.</span></li>
+            <li><b data-i18n="mac.s4.t">Vult de toegang in en logt in</b><span data-i18n="mac.s4.d">De AI ziet het niet. Het wachtwoord komt uit de kluis van CleverCoder of uit het wachtwoord dat Verdesk onthoudt, versleuteld met je Windows-account.</span></li>
+            <li><b data-i18n="mac.s5.t">Uploadt het bestand dat je gaf</b><span data-i18n="mac.s5.d">Voegt het in de browser toe, sleept het naar het vak of typt het in het bestandsdialoogvenster van Windows.</span></li>
+            <li><b data-i18n="mac.s6.t">Stopt als er iets is veranderd</b><span data-i18n="mac.s6.d">Ontbreekt een veld of zijn er twee gelijke, dan pauzeert de macro en meldt het. Hij klikt niet blindelings.</span></li>
+          </ol>
+        </div>
+      </div>
+      <div class="mx-card mx-rec">
+        <h3 class="mx-chip" data-i18n="mac.rec.t">De eerste keer, bij het opnemen</h3>
+        <div class="mx-win" aria-hidden="true">
+          <div class="mx-win-top"><span data-i18n="mac.win.brand">VERDESK · MACRO</span><span class="mx-state" data-i18n="mac.win.state">Opnemen</span></div>
+          <p class="mx-win-title" data-i18n="mac.win.title">“subir_factura” opnemen</p>
+          <p class="mx-win-help" data-i18n="mac.win.help">Typ de waarden: de AI ziet ze niet.</p>
+          <div class="mx-fld"><span class="mx-lab" data-i18n="mac.win.user">Gebruiker</span><span class="mx-in">••••••••</span></div>
+          <div class="mx-fld"><span class="mx-lab" data-i18n="mac.win.pass">Wachtwoord</span><span class="mx-in">••••••••</span></div>
+          <div class="mx-fld"><span class="mx-lab" data-i18n="mac.win.dest">Opslaan in</span><span class="mx-dest"><span class="mx-opt" data-i18n="mac.win.once">Alleen deze keer</span><span class="mx-opt" data-i18n="mac.win.rem">Onthouden</span><span class="mx-opt on" data-i18n="mac.win.vault">Kluis</span></span></div>
+          <span class="mx-go" data-i18n="mac.win.send">Typen en doorgaan</span>
+        </div>
+        <ul class="mx-facts">
+          <li><b data-i18n="mac.f1.t">De gegevens worden gevraagd in een Verdesk-venster</b><span data-i18n="mac.f1.d">De AI schrijft een naam tussen accolades, zoals {password}. Verdesk opent zijn venster en jij typt de waarde.</span></li>
+          <li><b data-i18n="mac.f2.t">Meerdere gegevens, één venster</b><span data-i18n="mac.f2.d">Gebruiker en wachtwoord worden samen gevraagd, met één bestemming voor beide.</span></li>
+          <li><b data-i18n="mac.f3.t">Jij kiest waar het blijft</b><span data-i18n="mac.f3.d">Alleen deze keer, onthouden en versleuteld op deze pc, of in de kluis van CleverCoder.</span></li>
+          <li><b data-i18n="mac.f4.t">De AI ziet het niet</b><span data-i18n="mac.f4.d">Niet in het antwoord, niet in het logboek, niet in de macro. De macro bewaart alleen de naam van het gegeven.</span></li>
+          <li><b data-i18n="mac.f5.t">Een bestand is nog een gegeven</b><span data-i18n="mac.f5.d">Een bestand uploaden wordt als gegeven in de macro bewaard: je geeft het bij elke uitvoering op.</span></li>
+        </ul>
+      </div>
+      <p class="mx-foot" data-i18n="mac.foot">De toegang typ je één keer, in het Verdesk-venster. Hij blijft in de kluis van CleverCoder of onthouden en versleuteld met je Windows-account. De AI ziet hem niet.</p>
+    </section>
+
     <section class="band" id="examples">
       <h2 class="label" data-i18n="sec.examples">Voorbeelden</h2>
       <ul class="ex">

@@ -163,6 +163,53 @@
       </ul>
     </section>
 
+    <section class="band" id="macros">
+      <div class="mx-head"><h2 class="label" data-i18n="sec.macros">Makra</h2><span class="pro">PRO</span></div>
+      <p class="mx-lede" data-i18n="mac.lede">Makro zapisuje zadanie, które już wykonano. AI prosi o nie jedną linią, a Verdesk je powtarza.</p>
+      <div class="mx-card mx-run">
+        <div class="mx-ask">
+          <h3 class="mx-chip" data-i18n="mac.ask.t">O co prosi AI</h3>
+          <pre class="mx-code"><code>subir_factura({ archivo: "C:/facturas/mayo.pdf" })</code></pre>
+          <p class="mx-cap" data-i18n="mac.ask.cap">Makro z instrukcjami pojawia się jako narzędzie z własną nazwą. Bez haseł, selektorów i czekania.</p>
+          <h3 class="mx-chip" data-i18n="mac.back.t">Co dostaje w odpowiedzi</h3>
+          <pre class="mx-code"><code>{ ok: true, executed, total, report }</code></pre>
+          <p class="mx-cap" data-i18n="mac.back.cap">Raport z wynikiem każdego kroku. Nigdy hasło.</p>
+        </div>
+        <div class="mx-sep" aria-hidden="true"></div>
+        <div class="mx-do">
+          <h3 class="mx-chip go" data-i18n="mac.do.t">Co Verdesk robi sam</h3>
+          <ol class="steps mx-steps">
+            <li><b data-i18n="mac.s1.t">Otwiera witrynę</b><span data-i18n="mac.s1.d">Przechodzi na stronę logowania.</span></li>
+            <li><b data-i18n="mac.s2.t">Sprawdza, czy jesteś już zalogowany</b><span data-i18n="mac.s2.d">Jeśli makro zawiera to sprawdzenie, a sesja jest otwarta, pomija logowanie. Jeśli nie, najpierw się loguje.</span></li>
+            <li><b data-i18n="mac.s3.t">Znajduje każde pole</b><span data-i18n="mac.s3.d">Szuka go według selektora, roli i nazwy i czeka do 8 s, aż się pojawi.</span></li>
+            <li><b data-i18n="mac.s4.t">Wpisuje dostęp i loguje się</b><span data-i18n="mac.s4.d">AI go nie widzi. Hasło pochodzi z sejfu CleverCoder albo z tego, które Verdesk zapamiętuje, zaszyfrowane Twoim kontem Windows.</span></li>
+            <li><b data-i18n="mac.s5.t">Wysyła podany plik</b><span data-i18n="mac.s5.d">Dołącza go w przeglądarce, upuszcza na jego polu albo wpisuje w oknie dialogowym plików Windows.</span></li>
+            <li><b data-i18n="mac.s6.t">Zatrzymuje się, gdy coś się zmieniło</b><span data-i18n="mac.s6.d">Gdy brakuje pola albo są dwa takie same, makro robi pauzę i informuje. Nie klika na ślepo.</span></li>
+          </ol>
+        </div>
+      </div>
+      <div class="mx-card mx-rec">
+        <h3 class="mx-chip" data-i18n="mac.rec.t">Za pierwszym razem, podczas nagrywania</h3>
+        <div class="mx-win" aria-hidden="true">
+          <div class="mx-win-top"><span data-i18n="mac.win.brand">VERDESK · MAKRO</span><span class="mx-state" data-i18n="mac.win.state">Nagrywanie</span></div>
+          <p class="mx-win-title" data-i18n="mac.win.title">Nagrywanie: „subir_factura”</p>
+          <p class="mx-win-help" data-i18n="mac.win.help">Wpisz wartości: AI ich nie widzi.</p>
+          <div class="mx-fld"><span class="mx-lab" data-i18n="mac.win.user">Użytkownik</span><span class="mx-in">••••••••</span></div>
+          <div class="mx-fld"><span class="mx-lab" data-i18n="mac.win.pass">Hasło</span><span class="mx-in">••••••••</span></div>
+          <div class="mx-fld"><span class="mx-lab" data-i18n="mac.win.dest">Zapisz w</span><span class="mx-dest"><span class="mx-opt" data-i18n="mac.win.once">Tylko ten raz</span><span class="mx-opt" data-i18n="mac.win.rem">Zapamiętaj</span><span class="mx-opt on" data-i18n="mac.win.vault">Sejf</span></span></div>
+          <span class="mx-go" data-i18n="mac.win.send">Wpisz i kontynuuj</span>
+        </div>
+        <ul class="mx-facts">
+          <li><b data-i18n="mac.f1.t">Dane są wymagane w oknie Verdesk</b><span data-i18n="mac.f1.d">AI zapisuje nazwę w nawiasach klamrowych, np. {password}. Verdesk otwiera swoje okno, a Ty wpisujesz wartość.</span></li>
+          <li><b data-i18n="mac.f2.t">Kilka danych, jedno okno</b><span data-i18n="mac.f2.d">Użytkownik i hasło są wymagane razem, z jednym miejscem zapisu dla obu.</span></li>
+          <li><b data-i18n="mac.f3.t">Ty wybierasz, gdzie zostają</b><span data-i18n="mac.f3.d">Tylko ten raz, zapamiętane i zaszyfrowane na tym komputerze albo w sejfie CleverCoder.</span></li>
+          <li><b data-i18n="mac.f4.t">AI ich nie widzi</b><span data-i18n="mac.f4.d">Ani w odpowiedzi, ani w dzienniku, ani w makrze. Makro zachowuje tylko nazwę danej.</span></li>
+          <li><b data-i18n="mac.f5.t">Plik to kolejna dana</b><span data-i18n="mac.f5.d">Wysłanie pliku zapisuje się w makrze jako dana: podajesz plik przy każdym uruchomieniu.</span></li>
+        </ul>
+      </div>
+      <p class="mx-foot" data-i18n="mac.foot">Dostęp wpisuje się raz, w oknie Verdesk. Zostaje w sejfie CleverCoder albo zapamiętany i zaszyfrowany Twoim kontem Windows. AI go nie widzi.</p>
+    </section>
+
     <section class="band" id="examples">
       <h2 class="label" data-i18n="sec.examples">Przykłady</h2>
       <ul class="ex">

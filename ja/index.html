@@ -163,6 +163,53 @@
       </ul>
     </section>
 
+    <section class="band" id="macros">
+      <div class="mx-head"><h2 class="label" data-i18n="sec.macros">マクロ</h2><span class="pro">PRO</span></div>
+      <p class="mx-lede" data-i18n="mac.lede">マクロは、すでに行った作業を保存します。AI は 1 行で呼び出し、Verdesk がそれを繰り返します。</p>
+      <div class="mx-card mx-run">
+        <div class="mx-ask">
+          <h3 class="mx-chip" data-i18n="mac.ask.t">AI が求めるもの</h3>
+          <pre class="mx-code"><code>subir_factura({ archivo: "C:/facturas/mayo.pdf" })</code></pre>
+          <p class="mx-cap" data-i18n="mac.ask.cap">説明を持つマクロは、独自の名前を持つツールとして表示されます。パスワードも、セレクターも、待機も不要です。</p>
+          <h3 class="mx-chip" data-i18n="mac.back.t">AI が受け取るもの</h3>
+          <pre class="mx-code"><code>{ ok: true, executed, total, report }</code></pre>
+          <p class="mx-cap" data-i18n="mac.back.cap">各手順の結果をまとめたレポート。パスワードは含まれません。</p>
+        </div>
+        <div class="mx-sep" aria-hidden="true"></div>
+        <div class="mx-do">
+          <h3 class="mx-chip go" data-i18n="mac.do.t">Verdesk が自動で行うこと</h3>
+          <ol class="steps mx-steps">
+            <li><b data-i18n="mac.s1.t">サイトを開く</b><span data-i18n="mac.s1.d">ログインページへ移動します。</span></li>
+            <li><b data-i18n="mac.s2.t">ログイン済みかを確認する</b><span data-i18n="mac.s2.d">マクロにこの確認が含まれていてセッションが開いていれば、ログインを省略します。そうでなければ先にログインします。</span></li>
+            <li><b data-i18n="mac.s3.t">各フィールドを見つける</b><span data-i18n="mac.s3.d">セレクター、ロール、名前で探し、表示されるまで最大 8 秒待ちます。</span></li>
+            <li><b data-i18n="mac.s4.t">認証情報を入力してログインする</b><span data-i18n="mac.s4.d">AI には見えません。パスワードは CleverCoder の保管庫、または Verdesk が記憶したものから取得され、お使いの Windows アカウントで暗号化されます。</span></li>
+            <li><b data-i18n="mac.s5.t">渡されたファイルをアップロードする</b><span data-i18n="mac.s5.d">ブラウザーで添付するか、その領域にドロップするか、Windows のファイルダイアログに入力します。</span></li>
+            <li><b data-i18n="mac.s6.t">変化があれば停止する</b><span data-i18n="mac.s6.d">フィールドがない、または同じものが 2 つある場合、マクロは一時停止して通知します。やみくもにクリックしません。</span></li>
+          </ol>
+        </div>
+      </div>
+      <div class="mx-card mx-rec">
+        <h3 class="mx-chip" data-i18n="mac.rec.t">初回、記録するとき</h3>
+        <div class="mx-win" aria-hidden="true">
+          <div class="mx-win-top"><span data-i18n="mac.win.brand">VERDESK · マクロ</span><span class="mx-state" data-i18n="mac.win.state">記録中</span></div>
+          <p class="mx-win-title" data-i18n="mac.win.title">「subir_factura」 を記録中</p>
+          <p class="mx-win-help" data-i18n="mac.win.help">値を入力してください。AI には見えません。</p>
+          <div class="mx-fld"><span class="mx-lab" data-i18n="mac.win.user">ユーザー</span><span class="mx-in">••••••••</span></div>
+          <div class="mx-fld"><span class="mx-lab" data-i18n="mac.win.pass">パスワード</span><span class="mx-in">••••••••</span></div>
+          <div class="mx-fld"><span class="mx-lab" data-i18n="mac.win.dest">保存先</span><span class="mx-dest"><span class="mx-opt" data-i18n="mac.win.once">今回のみ</span><span class="mx-opt" data-i18n="mac.win.rem">記憶する</span><span class="mx-opt on" data-i18n="mac.win.vault">保管庫</span></span></div>
+          <span class="mx-go" data-i18n="mac.win.send">入力して続行</span>
+        </div>
+        <ul class="mx-facts">
+          <li><b data-i18n="mac.f1.t">データは Verdesk のウィンドウで求められる</b><span data-i18n="mac.f1.d">AI は {password} のように、波括弧で名前を書きます。Verdesk が自分のウィンドウを開き、値はあなたが入力します。</span></li>
+          <li><b data-i18n="mac.f2.t">複数のデータ、1 つのウィンドウ</b><span data-i18n="mac.f2.d">ユーザーとパスワードはまとめて求められ、保存先は両方で 1 つです。</span></li>
+          <li><b data-i18n="mac.f3.t">保存先は自分で選ぶ</b><span data-i18n="mac.f3.d">今回のみ、この PC に記憶して暗号化、または CleverCoder の保管庫。</span></li>
+          <li><b data-i18n="mac.f4.t">AI には見えない</b><span data-i18n="mac.f4.d">応答にも、ログにも、マクロにも含まれません。マクロが保持するのはデータの名前だけです。</span></li>
+          <li><b data-i18n="mac.f5.t">ファイルもデータの 1 つ</b><span data-i18n="mac.f5.d">ファイルのアップロードはマクロのデータとして保存され、実行のたびに指定します。</span></li>
+        </ul>
+      </div>
+      <p class="mx-foot" data-i18n="mac.foot">認証情報は Verdesk のウィンドウで一度だけ入力します。CleverCoder の保管庫、または記憶されて Windows アカウントで暗号化された状態で保存されます。AI には見えません。</p>
+    </section>
+
     <section class="band" id="examples">
       <h2 class="label" data-i18n="sec.examples">使用例</h2>
       <ul class="ex">

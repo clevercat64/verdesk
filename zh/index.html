@@ -163,6 +163,53 @@
       </ul>
     </section>
 
+    <section class="band" id="macros">
+      <div class="mx-head"><h2 class="label" data-i18n="sec.macros">宏</h2><span class="pro">PRO</span></div>
+      <p class="mx-lede" data-i18n="mac.lede">宏会保存您已完成的任务。AI 用一行调用它，Verdesk 负责重复执行。</p>
+      <div class="mx-card mx-run">
+        <div class="mx-ask">
+          <h3 class="mx-chip" data-i18n="mac.ask.t">AI 请求的内容</h3>
+          <pre class="mx-code"><code>subir_factura({ archivo: "C:/facturas/mayo.pdf" })</code></pre>
+          <p class="mx-cap" data-i18n="mac.ask.cap">带有说明的宏会显示为有独立名称的工具。无需密码、选择器或等待。</p>
+          <h3 class="mx-chip" data-i18n="mac.back.t">AI 收到的内容</h3>
+          <pre class="mx-code"><code>{ ok: true, executed, total, report }</code></pre>
+          <p class="mx-cap" data-i18n="mac.back.cap">每一步结果的报告。绝不包含密码。</p>
+        </div>
+        <div class="mx-sep" aria-hidden="true"></div>
+        <div class="mx-do">
+          <h3 class="mx-chip go" data-i18n="mac.do.t">Verdesk 自动完成的部分</h3>
+          <ol class="steps mx-steps">
+            <li><b data-i18n="mac.s1.t">打开网站</b><span data-i18n="mac.s1.d">进入登录页面。</span></li>
+            <li><b data-i18n="mac.s2.t">检查您是否已登录</b><span data-i18n="mac.s2.d">如果宏包含此检查且会话已打开，就会跳过登录；否则先登录。</span></li>
+            <li><b data-i18n="mac.s3.t">找到每个字段</b><span data-i18n="mac.s3.d">按选择器、角色和名称查找，并最多等待 8 秒让它出现。</span></li>
+            <li><b data-i18n="mac.s4.t">填入凭据并登录</b><span data-i18n="mac.s4.d">AI 看不到它。密码来自 CleverCoder 保险库，或来自 Verdesk 记住的密码，并由您的 Windows 账户加密。</span></li>
+            <li><b data-i18n="mac.s5.t">上传您提供的文件</b><span data-i18n="mac.s5.d">在浏览器中附加、拖放到其区域，或在 Windows 文件对话框中输入。</span></li>
+            <li><b data-i18n="mac.s6.t">有变化时停止</b><span data-i18n="mac.s6.d">如果缺少字段或出现两个相同的字段，宏会暂停并提示，不会盲目点击。</span></li>
+          </ol>
+        </div>
+      </div>
+      <div class="mx-card mx-rec">
+        <h3 class="mx-chip" data-i18n="mac.rec.t">第一次，录制时</h3>
+        <div class="mx-win" aria-hidden="true">
+          <div class="mx-win-top"><span data-i18n="mac.win.brand">VERDESK · 宏</span><span class="mx-state" data-i18n="mac.win.state">录制中</span></div>
+          <p class="mx-win-title" data-i18n="mac.win.title">正在录制 “subir_factura”</p>
+          <p class="mx-win-help" data-i18n="mac.win.help">输入这些值：AI 看不到它们。</p>
+          <div class="mx-fld"><span class="mx-lab" data-i18n="mac.win.user">用户</span><span class="mx-in">••••••••</span></div>
+          <div class="mx-fld"><span class="mx-lab" data-i18n="mac.win.pass">密码</span><span class="mx-in">••••••••</span></div>
+          <div class="mx-fld"><span class="mx-lab" data-i18n="mac.win.dest">保存到</span><span class="mx-dest"><span class="mx-opt" data-i18n="mac.win.once">仅这一次</span><span class="mx-opt" data-i18n="mac.win.rem">记住</span><span class="mx-opt on" data-i18n="mac.win.vault">保险库</span></span></div>
+          <span class="mx-go" data-i18n="mac.win.send">输入并继续</span>
+        </div>
+        <ul class="mx-facts">
+          <li><b data-i18n="mac.f1.t">数据在 Verdesk 的窗口中请求</b><span data-i18n="mac.f1.d">AI 用花括号写一个名称，例如 {password}。Verdesk 打开自己的窗口，由您输入值。</span></li>
+          <li><b data-i18n="mac.f2.t">多项数据，一个窗口</b><span data-i18n="mac.f2.d">用户和密码一起请求，两者共用一个保存位置。</span></li>
+          <li><b data-i18n="mac.f3.t">由您选择保存位置</b><span data-i18n="mac.f3.d">仅这一次，在本机记住并加密，或存入 CleverCoder 保险库。</span></li>
+          <li><b data-i18n="mac.f4.t">AI 看不到</b><span data-i18n="mac.f4.d">不会出现在回复、日志或宏里。宏只保留数据的名称。</span></li>
+          <li><b data-i18n="mac.f5.t">文件也是一项数据</b><span data-i18n="mac.f5.d">上传文件会作为宏的数据保存：每次运行时由您提供。</span></li>
+        </ul>
+      </div>
+      <p class="mx-foot" data-i18n="mac.foot">凭据只需在 Verdesk 的窗口中输入一次。它保存在 CleverCoder 保险库，或被记住并由您的 Windows 账户加密。AI 看不到。</p>
+    </section>
+
     <section class="band" id="examples">
       <h2 class="label" data-i18n="sec.examples">示例</h2>
       <ul class="ex">

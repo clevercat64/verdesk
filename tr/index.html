@@ -163,6 +163,53 @@
       </ul>
     </section>
 
+    <section class="band" id="macros">
+      <div class="mx-head"><h2 class="label" data-i18n="sec.macros">Makrolar</h2><span class="pro">PRO</span></div>
+      <p class="mx-lede" data-i18n="mac.lede">Makro, daha önce yaptığınız bir görevi kaydeder. Yapay zekâ onu tek satırla ister, Verdesk tekrarlar.</p>
+      <div class="mx-card mx-run">
+        <div class="mx-ask">
+          <h3 class="mx-chip" data-i18n="mac.ask.t">Yapay zekânın istediği</h3>
+          <pre class="mx-code"><code>subir_factura({ archivo: "C:/facturas/mayo.pdf" })</code></pre>
+          <p class="mx-cap" data-i18n="mac.ask.cap">Talimatları olan bir makro, kendi adıyla bir araç olarak görünür. Parola, seçici ya da bekleme yok.</p>
+          <h3 class="mx-chip" data-i18n="mac.back.t">Karşılığında aldığı</h3>
+          <pre class="mx-code"><code>{ ok: true, executed, total, report }</code></pre>
+          <p class="mx-cap" data-i18n="mac.back.cap">Her adımın sonucunu içeren bir rapor. Parola asla.</p>
+        </div>
+        <div class="mx-sep" aria-hidden="true"></div>
+        <div class="mx-do">
+          <h3 class="mx-chip go" data-i18n="mac.do.t">Verdesk'in kendi başına yaptığı</h3>
+          <ol class="steps mx-steps">
+            <li><b data-i18n="mac.s1.t">Siteyi açar</b><span data-i18n="mac.s1.d">Giriş sayfasına gider.</span></li>
+            <li><b data-i18n="mac.s2.t">Zaten giriş yapıp yapmadığınıza bakar</b><span data-i18n="mac.s2.d">Makro bu denetimi içeriyorsa ve oturum açıksa girişi atlar. İçermiyorsa önce giriş yapar.</span></li>
+            <li><b data-i18n="mac.s3.t">Her alanı bulur</b><span data-i18n="mac.s3.d">Seçiciye, role ve ada göre arar; görünmesi için en fazla 8 sn bekler.</span></li>
+            <li><b data-i18n="mac.s4.t">Erişimi yazar ve giriş yapar</b><span data-i18n="mac.s4.d">Yapay zekâ bunu görmez. Parola CleverCoder kasasından ya da Verdesk'in hatırladığından gelir; Windows hesabınızla şifrelenmiştir.</span></li>
+            <li><b data-i18n="mac.s5.t">Verdiğiniz dosyayı yükler</b><span data-i18n="mac.s5.d">Tarayıcıda ekler, kutusuna bırakır ya da Windows dosya iletişim kutusuna yazar.</span></li>
+            <li><b data-i18n="mac.s6.t">Bir şey değiştiyse durur</b><span data-i18n="mac.s6.d">Bir alan eksikse ya da aynısından iki tane varsa makro duraklar ve haber verir. Körü körüne tıklamaz.</span></li>
+          </ol>
+        </div>
+      </div>
+      <div class="mx-card mx-rec">
+        <h3 class="mx-chip" data-i18n="mac.rec.t">İlk seferde, kayıt sırasında</h3>
+        <div class="mx-win" aria-hidden="true">
+          <div class="mx-win-top"><span data-i18n="mac.win.brand">VERDESK · MAKRO</span><span class="mx-state" data-i18n="mac.win.state">Kaydediliyor</span></div>
+          <p class="mx-win-title" data-i18n="mac.win.title">“subir_factura” kaydediliyor</p>
+          <p class="mx-win-help" data-i18n="mac.win.help">Değerleri yaz: yapay zekâ onları görmez.</p>
+          <div class="mx-fld"><span class="mx-lab" data-i18n="mac.win.user">Kullanıcı</span><span class="mx-in">••••••••</span></div>
+          <div class="mx-fld"><span class="mx-lab" data-i18n="mac.win.pass">Parola</span><span class="mx-in">••••••••</span></div>
+          <div class="mx-fld"><span class="mx-lab" data-i18n="mac.win.dest">Kaydedilecek yer</span><span class="mx-dest"><span class="mx-opt" data-i18n="mac.win.once">Sadece bu sefer</span><span class="mx-opt" data-i18n="mac.win.rem">Hatırla</span><span class="mx-opt on" data-i18n="mac.win.vault">Kasa</span></span></div>
+          <span class="mx-go" data-i18n="mac.win.send">Yaz ve devam et</span>
+        </div>
+        <ul class="mx-facts">
+          <li><b data-i18n="mac.f1.t">Veriler bir Verdesk penceresinde istenir</b><span data-i18n="mac.f1.d">Yapay zekâ, {password} gibi, süslü parantez içinde bir ad yazar. Verdesk penceresini açar, değeri siz yazarsınız.</span></li>
+          <li><b data-i18n="mac.f2.t">Birkaç veri, tek pencere</b><span data-i18n="mac.f2.d">Kullanıcı ve parola birlikte istenir; ikisi için tek bir hedef vardır.</span></li>
+          <li><b data-i18n="mac.f3.t">Nerede kalacağını siz seçersiniz</b><span data-i18n="mac.f3.d">Sadece bu sefer, bu bilgisayarda hatırlanıp şifrelenmiş olarak ya da CleverCoder kasasında.</span></li>
+          <li><b data-i18n="mac.f4.t">Yapay zekâ görmez</b><span data-i18n="mac.f4.d">Ne yanıtta, ne günlükte, ne makroda. Makro yalnızca verinin adını tutar.</span></li>
+          <li><b data-i18n="mac.f5.t">Bir dosya da bir veridir</b><span data-i18n="mac.f5.d">Dosya yükleme, makroda veri olarak kaydedilir: her çalıştırmada siz verirsiniz.</span></li>
+        </ul>
+      </div>
+      <p class="mx-foot" data-i18n="mac.foot">Erişim yalnızca bir kez, Verdesk penceresinde yazılır. CleverCoder kasasında ya da hatırlanıp Windows hesabınızla şifrelenmiş olarak kalır. Yapay zekâ görmez.</p>
+    </section>
+
     <section class="band" id="examples">
       <h2 class="label" data-i18n="sec.examples">Örnekler</h2>
       <ul class="ex">

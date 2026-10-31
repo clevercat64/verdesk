@@ -163,6 +163,53 @@
       </ul>
     </section>
 
+    <section class="band" id="macros">
+      <div class="mx-head"><h2 class="label" data-i18n="sec.macros">Macro</h2><span class="pro">PRO</span></div>
+      <p class="mx-lede" data-i18n="mac.lede">Una macro salva un'attività che hai già fatto. L'IA la richiede con una riga e Verdesk la ripete.</p>
+      <div class="mx-card mx-run">
+        <div class="mx-ask">
+          <h3 class="mx-chip" data-i18n="mac.ask.t">Cosa chiede l'IA</h3>
+          <pre class="mx-code"><code>subir_factura({ archivo: "C:/facturas/mayo.pdf" })</code></pre>
+          <p class="mx-cap" data-i18n="mac.ask.cap">Una macro con istruzioni compare come strumento con il proprio nome. Senza password, selettori né attese.</p>
+          <h3 class="mx-chip" data-i18n="mac.back.t">Cosa riceve in cambio</h3>
+          <pre class="mx-code"><code>{ ok: true, executed, total, report }</code></pre>
+          <p class="mx-cap" data-i18n="mac.back.cap">Un rapporto con il risultato di ogni passo. Mai la password.</p>
+        </div>
+        <div class="mx-sep" aria-hidden="true"></div>
+        <div class="mx-do">
+          <h3 class="mx-chip go" data-i18n="mac.do.t">Cosa fa Verdesk da solo</h3>
+          <ol class="steps mx-steps">
+            <li><b data-i18n="mac.s1.t">Apre il sito</b><span data-i18n="mac.s1.d">Va alla pagina di accesso.</span></li>
+            <li><b data-i18n="mac.s2.t">Controlla se sei già dentro</b><span data-i18n="mac.s2.d">Se la macro include questo controllo e la sessione è aperta, salta l'accesso. Altrimenti accede prima.</span></li>
+            <li><b data-i18n="mac.s3.t">Trova ogni campo</b><span data-i18n="mac.s3.d">Lo cerca per selettore, ruolo e nome, e attende fino a 8 s che compaia.</span></li>
+            <li><b data-i18n="mac.s4.t">Inserisce l'accesso ed entra</b><span data-i18n="mac.s4.d">L'IA non lo vede. La password arriva dalla cassaforte di CleverCoder o da quella che Verdesk ricorda, cifrata con il tuo account Windows.</span></li>
+            <li><b data-i18n="mac.s5.t">Carica il file che gli hai dato</b><span data-i18n="mac.s5.d">Lo allega nel browser, lo trascina sul suo riquadro o lo scrive nella finestra di dialogo dei file di Windows.</span></li>
+            <li><b data-i18n="mac.s6.t">Si ferma se qualcosa è cambiato</b><span data-i18n="mac.s6.d">Se manca un campo o ce ne sono due uguali, la macro va in pausa e avvisa. Non clicca alla cieca.</span></li>
+          </ol>
+        </div>
+      </div>
+      <div class="mx-card mx-rec">
+        <h3 class="mx-chip" data-i18n="mac.rec.t">La prima volta, durante la registrazione</h3>
+        <div class="mx-win" aria-hidden="true">
+          <div class="mx-win-top"><span data-i18n="mac.win.brand">VERDESK · MACRO</span><span class="mx-state" data-i18n="mac.win.state">Registrazione</span></div>
+          <p class="mx-win-title" data-i18n="mac.win.title">Registrazione di «subir_factura»</p>
+          <p class="mx-win-help" data-i18n="mac.win.help">Scrivi i valori: l'IA non li vede.</p>
+          <div class="mx-fld"><span class="mx-lab" data-i18n="mac.win.user">Utente</span><span class="mx-in">••••••••</span></div>
+          <div class="mx-fld"><span class="mx-lab" data-i18n="mac.win.pass">Password</span><span class="mx-in">••••••••</span></div>
+          <div class="mx-fld"><span class="mx-lab" data-i18n="mac.win.dest">Salva in</span><span class="mx-dest"><span class="mx-opt" data-i18n="mac.win.once">Solo stavolta</span><span class="mx-opt" data-i18n="mac.win.rem">Ricorda</span><span class="mx-opt on" data-i18n="mac.win.vault">Cassaforte</span></span></div>
+          <span class="mx-go" data-i18n="mac.win.send">Scrivi e continua</span>
+        </div>
+        <ul class="mx-facts">
+          <li><b data-i18n="mac.f1.t">I dati si chiedono in una finestra di Verdesk</b><span data-i18n="mac.f1.d">L'IA scrive un nome tra parentesi graffe, come {password}. Verdesk apre la sua finestra e tu inserisci il valore.</span></li>
+          <li><b data-i18n="mac.f2.t">Più dati, una sola finestra</b><span data-i18n="mac.f2.d">Utente e password si chiedono insieme, con una sola destinazione per entrambi.</span></li>
+          <li><b data-i18n="mac.f3.t">Scegli tu dove restano</b><span data-i18n="mac.f3.d">Solo stavolta, ricordati e cifrati su questo PC, o nella cassaforte di CleverCoder.</span></li>
+          <li><b data-i18n="mac.f4.t">L'IA non li vede</b><span data-i18n="mac.f4.d">Né nella risposta, né nel registro, né nella macro. La macro conserva solo il nome del dato.</span></li>
+          <li><b data-i18n="mac.f5.t">Un file è un dato in più</b><span data-i18n="mac.f5.d">Il caricamento di un file resta come dato della macro: lo indichi a ogni esecuzione.</span></li>
+        </ul>
+      </div>
+      <p class="mx-foot" data-i18n="mac.foot">L'accesso si scrive una sola volta, nella finestra di Verdesk. Resta nella cassaforte di CleverCoder oppure ricordato e cifrato con il tuo account Windows. L'IA non lo vede.</p>
+    </section>
+
     <section class="band" id="examples">
       <h2 class="label" data-i18n="sec.examples">Esempi</h2>
       <ul class="ex">

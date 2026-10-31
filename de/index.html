@@ -163,6 +163,53 @@
       </ul>
     </section>
 
+    <section class="band" id="macros">
+      <div class="mx-head"><h2 class="label" data-i18n="sec.macros">Makros</h2><span class="pro">PRO</span></div>
+      <p class="mx-lede" data-i18n="mac.lede">Ein Makro speichert eine Aufgabe, die Sie schon erledigt haben. Die KI ruft sie mit einer Zeile auf und Verdesk wiederholt sie.</p>
+      <div class="mx-card mx-run">
+        <div class="mx-ask">
+          <h3 class="mx-chip" data-i18n="mac.ask.t">Was die KI anfordert</h3>
+          <pre class="mx-code"><code>subir_factura({ archivo: "C:/facturas/mayo.pdf" })</code></pre>
+          <p class="mx-cap" data-i18n="mac.ask.cap">Ein Makro mit Anweisungen erscheint als Werkzeug mit eigenem Namen. Ohne Passwörter, Selektoren oder Wartezeiten.</p>
+          <h3 class="mx-chip" data-i18n="mac.back.t">Was sie zurückbekommt</h3>
+          <pre class="mx-code"><code>{ ok: true, executed, total, report }</code></pre>
+          <p class="mx-cap" data-i18n="mac.back.cap">Ein Bericht mit dem Ergebnis jedes Schritts. Nie das Passwort.</p>
+        </div>
+        <div class="mx-sep" aria-hidden="true"></div>
+        <div class="mx-do">
+          <h3 class="mx-chip go" data-i18n="mac.do.t">Was Verdesk von selbst erledigt</h3>
+          <ol class="steps mx-steps">
+            <li><b data-i18n="mac.s1.t">Öffnet die Website</b><span data-i18n="mac.s1.d">Geht zur Anmeldeseite.</span></li>
+            <li><b data-i18n="mac.s2.t">Prüft, ob Sie schon angemeldet sind</b><span data-i18n="mac.s2.d">Enthält das Makro diese Prüfung und ist die Sitzung offen, überspringt es die Anmeldung. Sonst meldet es sich zuerst an.</span></li>
+            <li><b data-i18n="mac.s3.t">Findet jedes Feld</b><span data-i18n="mac.s3.d">Sucht es nach Selektor, Rolle und Name und wartet bis zu 8 s, bis es erscheint.</span></li>
+            <li><b data-i18n="mac.s4.t">Gibt den Zugang ein und meldet sich an</b><span data-i18n="mac.s4.d">Die KI sieht ihn nicht. Das Passwort stammt aus dem Tresor von CleverCoder oder aus dem, das Verdesk sich merkt, verschlüsselt mit Ihrem Windows-Konto.</span></li>
+            <li><b data-i18n="mac.s5.t">Lädt die angegebene Datei hoch</b><span data-i18n="mac.s5.d">Hängt sie im Browser an, legt sie auf ihrem Feld ab oder gibt sie im Windows-Dateidialog ein.</span></li>
+            <li><b data-i18n="mac.s6.t">Hält an, wenn sich etwas geändert hat</b><span data-i18n="mac.s6.d">Fehlt ein Feld oder gibt es zwei gleiche, pausiert das Makro und meldet es. Es klickt nicht blind.</span></li>
+          </ol>
+        </div>
+      </div>
+      <div class="mx-card mx-rec">
+        <h3 class="mx-chip" data-i18n="mac.rec.t">Beim ersten Mal, bei der Aufnahme</h3>
+        <div class="mx-win" aria-hidden="true">
+          <div class="mx-win-top"><span data-i18n="mac.win.brand">VERDESK · MAKRO</span><span class="mx-state" data-i18n="mac.win.state">Aufnahme</span></div>
+          <p class="mx-win-title" data-i18n="mac.win.title">Aufnahme von „subir_factura“</p>
+          <p class="mx-win-help" data-i18n="mac.win.help">Gib die Werte ein: die KI sieht sie nicht.</p>
+          <div class="mx-fld"><span class="mx-lab" data-i18n="mac.win.user">Benutzer</span><span class="mx-in">••••••••</span></div>
+          <div class="mx-fld"><span class="mx-lab" data-i18n="mac.win.pass">Passwort</span><span class="mx-in">••••••••</span></div>
+          <div class="mx-fld"><span class="mx-lab" data-i18n="mac.win.dest">Speichern in</span><span class="mx-dest"><span class="mx-opt" data-i18n="mac.win.once">Nur diesmal</span><span class="mx-opt" data-i18n="mac.win.rem">Merken</span><span class="mx-opt on" data-i18n="mac.win.vault">Tresor</span></span></div>
+          <span class="mx-go" data-i18n="mac.win.send">Eingeben und weiter</span>
+        </div>
+        <ul class="mx-facts">
+          <li><b data-i18n="mac.f1.t">Die Daten werden in einem Verdesk-Fenster abgefragt</b><span data-i18n="mac.f1.d">Die KI schreibt einen Namen in geschweiften Klammern, etwa {password}. Verdesk öffnet sein Fenster, und Sie geben den Wert ein.</span></li>
+          <li><b data-i18n="mac.f2.t">Mehrere Angaben, ein Fenster</b><span data-i18n="mac.f2.d">Benutzer und Passwort werden zusammen abgefragt, mit einem gemeinsamen Ziel.</span></li>
+          <li><b data-i18n="mac.f3.t">Sie wählen, wo sie bleiben</b><span data-i18n="mac.f3.d">Nur diesmal, gemerkt und verschlüsselt auf diesem PC oder im Tresor von CleverCoder.</span></li>
+          <li><b data-i18n="mac.f4.t">Die KI sieht sie nicht</b><span data-i18n="mac.f4.d">Nicht in der Antwort, nicht im Protokoll, nicht im Makro. Das Makro behält nur den Namen der Angabe.</span></li>
+          <li><b data-i18n="mac.f5.t">Eine Datei ist eine weitere Angabe</b><span data-i18n="mac.f5.d">Ein Datei-Upload wird als Angabe im Makro gespeichert: Sie nennen die Datei bei jedem Lauf.</span></li>
+        </ul>
+      </div>
+      <p class="mx-foot" data-i18n="mac.foot">Der Zugang wird nur einmal eingegeben, im Verdesk-Fenster. Er bleibt im Tresor von CleverCoder oder gemerkt und verschlüsselt mit Ihrem Windows-Konto. Die KI sieht ihn nicht.</p>
+    </section>
+
     <section class="band" id="examples">
       <h2 class="label" data-i18n="sec.examples">Beispiele</h2>
       <ul class="ex">

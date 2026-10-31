@@ -163,6 +163,53 @@
       </ul>
     </section>
 
+    <section class="band" id="macros">
+      <div class="mx-head"><h2 class="label" data-i18n="sec.macros">Макроси</h2><span class="pro">PRO</span></div>
+      <p class="mx-lede" data-i18n="mac.lede">Макрос зберігає завдання, яке ви вже виконали. ШІ викликає його одним рядком, а Verdesk повторює.</p>
+      <div class="mx-card mx-run">
+        <div class="mx-ask">
+          <h3 class="mx-chip" data-i18n="mac.ask.t">Що просить ШІ</h3>
+          <pre class="mx-code"><code>subir_factura({ archivo: "C:/facturas/mayo.pdf" })</code></pre>
+          <p class="mx-cap" data-i18n="mac.ask.cap">Макрос з інструкціями з’являється як інструмент із власною назвою. Без паролів, селекторів і очікувань.</p>
+          <h3 class="mx-chip" data-i18n="mac.back.t">Що він отримує у відповідь</h3>
+          <pre class="mx-code"><code>{ ok: true, executed, total, report }</code></pre>
+          <p class="mx-cap" data-i18n="mac.back.cap">Звіт із результатом кожного кроку. Ніколи не пароль.</p>
+        </div>
+        <div class="mx-sep" aria-hidden="true"></div>
+        <div class="mx-do">
+          <h3 class="mx-chip go" data-i18n="mac.do.t">Що Verdesk робить сам</h3>
+          <ol class="steps mx-steps">
+            <li><b data-i18n="mac.s1.t">Відкриває сайт</b><span data-i18n="mac.s1.d">Переходить на сторінку входу.</span></li>
+            <li><b data-i18n="mac.s2.t">Перевіряє, чи ви вже увійшли</b><span data-i18n="mac.s2.d">Якщо макрос містить цю перевірку і сеанс відкритий, вхід пропускається. Якщо ні, спочатку виконується вхід.</span></li>
+            <li><b data-i18n="mac.s3.t">Знаходить кожне поле</b><span data-i18n="mac.s3.d">Шукає його за селектором, роллю та назвою і чекає до 8 с, поки воно з’явиться.</span></li>
+            <li><b data-i18n="mac.s4.t">Вводить доступ і входить</b><span data-i18n="mac.s4.d">ШІ його не бачить. Пароль береться зі сховища CleverCoder або з того, який запам’ятовує Verdesk; його зашифровано вашим обліковим записом Windows.</span></li>
+            <li><b data-i18n="mac.s5.t">Завантажує вказаний вами файл</b><span data-i18n="mac.s5.d">Додає його в браузері, перетягує в його область або вводить у діалозі вибору файлів Windows.</span></li>
+            <li><b data-i18n="mac.s6.t">Зупиняється, якщо щось змінилося</b><span data-i18n="mac.s6.d">Якщо поля немає або збігаються два, макрос ставиться на паузу й повідомляє. Він не клікає наосліп.</span></li>
+          </ol>
+        </div>
+      </div>
+      <div class="mx-card mx-rec">
+        <h3 class="mx-chip" data-i18n="mac.rec.t">Уперше, під час запису</h3>
+        <div class="mx-win" aria-hidden="true">
+          <div class="mx-win-top"><span data-i18n="mac.win.brand">VERDESK · МАКРОС</span><span class="mx-state" data-i18n="mac.win.state">Запис</span></div>
+          <p class="mx-win-title" data-i18n="mac.win.title">Запис «subir_factura»</p>
+          <p class="mx-win-help" data-i18n="mac.win.help">Введіть значення: ШІ їх не бачить.</p>
+          <div class="mx-fld"><span class="mx-lab" data-i18n="mac.win.user">Користувач</span><span class="mx-in">••••••••</span></div>
+          <div class="mx-fld"><span class="mx-lab" data-i18n="mac.win.pass">Пароль</span><span class="mx-in">••••••••</span></div>
+          <div class="mx-fld"><span class="mx-lab" data-i18n="mac.win.dest">Де зберегти</span><span class="mx-dest"><span class="mx-opt" data-i18n="mac.win.once">Лише цього разу</span><span class="mx-opt" data-i18n="mac.win.rem">Запам’ятати</span><span class="mx-opt on" data-i18n="mac.win.vault">Сховище</span></span></div>
+          <span class="mx-go" data-i18n="mac.win.send">Ввести й продовжити</span>
+        </div>
+        <ul class="mx-facts">
+          <li><b data-i18n="mac.f1.t">Дані запитуються у вікні Verdesk</b><span data-i18n="mac.f1.d">ШІ пише назву у фігурних дужках, наприклад {password}. Verdesk відкриває своє вікно, а ви вводите значення.</span></li>
+          <li><b data-i18n="mac.f2.t">Кілька даних, одне вікно</b><span data-i18n="mac.f2.d">Користувач і пароль запитуються разом, з одним місцем збереження для обох.</span></li>
+          <li><b data-i18n="mac.f3.t">Ви обираєте, де вони залишаться</b><span data-i18n="mac.f3.d">Лише цього разу, запам’ятані й зашифровані на цьому ПК або у сховищі CleverCoder.</span></li>
+          <li><b data-i18n="mac.f4.t">ШІ їх не бачить</b><span data-i18n="mac.f4.d">Ні у відповіді, ні в журналі, ні в макросі. Макрос зберігає лише назву даних.</span></li>
+          <li><b data-i18n="mac.f5.t">Файл — ще одні дані</b><span data-i18n="mac.f5.d">Завантаження файлу зберігається в макросі як дані: ви вказуєте файл під час кожного запуску.</span></li>
+        </ul>
+      </div>
+      <p class="mx-foot" data-i18n="mac.foot">Доступ вводиться один раз, у вікні Verdesk. Він залишається у сховищі CleverCoder або запам’ятовується й шифрується вашим обліковим записом Windows. ШІ його не бачить.</p>
+    </section>
+
     <section class="band" id="examples">
       <h2 class="label" data-i18n="sec.examples">Приклади</h2>
       <ul class="ex">
